@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>推荐歌曲</title>
+    <link rel="stylesheet" href="./src/reset.css">
+    <link rel="stylesheet" href="./src/index.css">
+    <script src="./src/axios.min.js"></script>
+    <script src="./src/jquery-3.6.0.min.js"></script>
+    <script src="./src/newSongs.js"></script>
+</head>
+
+<body>
+    <div class="wangyi-music">
+        <div class="wangyyi-newsongs">
+            <!-- <header>
+                <div class="wangyi-music">
+                    <div class="wangyi-music-top">
+                        <span class="wangyi-music-name"><i></i>网抑晕音乐</span>
+                        <span class="wangyi-music-download">下载APP</span>
+                    </div>
+                    <div class="wangyi-music-list">
+                        <ul>
+                            <li><span>推荐音乐</span></li>
+                            <li><span class="middle-list">热歌榜</span></li>
+                            <li><span>搜索</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </header> -->
+            <main class="newsongs">
+                <div class="newsongs-bg">
+                    <div class="newsongs-pic"></div>
+                    <span class="update"></span>
+                </div>
+                <div class="newsongs-list">
+                </div>
+            </main>
+        </div>
+        <div class="songplay">
+            <div class="songPlay-top">
+                <span class="return">&lt;</span>
+                <span class="song-play-name"></span>
+                <span class="other"></span>
+            </div>
+            <main class="song">
+                <div class="line"></div>
+                <div class="song-lryic">
+                    <div class="song-lryic-list">
+                    </div>
+                </div>
+                <div class="song-audio">
+                    <audio id="music" class="audio" controls autoplay>
+                    </audio>
+                    <!-- <div class="controller">
+                        <button class="play">播放</button>
+                        <input type="range" min="0" max="100" value="0" id="progress">
+                        <span class="current">0:00</span>
+                        <span class="duration">0:00</span>
+                        <span class="voice"></span>
+                    </div> -->
+                </div>
+            </main>
+            <div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        $(function () {
+            console.log(jQuery == $);
+
+            let $newsongsList = $(".newsongs-list")
+            let newsong = new Newsongs($newsongsList);
+            let $audio = document.querySelector(".audio");
+
+            function audioLoad() {
+                $audio.load();
+            }
+
+            // 更新时间
+            let date = new Date();
+
+            function addZero(num) {
+                return num >= 10 ? num : '0' + num
+            }
+
+            function upadte(date) {
+                let mouth = date.getMonth() + 1;
+                let days = date.getDate();
+
+                mouth = addZero(mouth);
+                days = addZero(days);
+                let $update = $(".wangyyi-newsongs .newsongs .newsongs-bg .update");
+                $update.text(`更新日期：${mouth}月${days}日`);
+            }
+
+            upadte(date);
+
+        })
+    </script>
+</body>
+
+</html>

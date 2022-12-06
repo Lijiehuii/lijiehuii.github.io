@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini drawing board 迷你画板</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .draw {
+            box-sizing: border-box;
+            position: relative;
+            width: 500px;
+            height: 100%;
+            margin: 40px auto;
+            border: 1px solid black;
+        }
+
+        .draw .draw-controller {
+            box-sizing: border-box;
+            width: 100%;
+            height: 1005;
+            padding-left: 10px;
+            border-bottom: 1px solid black;
+        }
+
+        .draw .draw-controller .draw-choose-color {
+            box-sizing: border-box;
+            width: 100%;
+            height: 40px;
+            line-height: 40px;
+            /* background-color: red; */
+        }
+
+        .draw .draw-controller .draw-choose-width {
+            box-sizing: border-box;
+            width: 100%;
+            height: 40px;
+            line-height: 40px;
+            /* background-color: red; */
+        }
+
+        span,
+        .color-list,
+        .width-list {
+            float: left;
+        }
+
+        .color-list li {
+            box-sizing: border-box;
+            border: 3px solid gray;
+            width: 30px;
+            height: 30px;
+            float: left;
+            margin-right: 10px;
+            margin-top: 5px;
+        }
+
+        .width-list li {
+            float: left;
+            width: 25px;
+            height: 25px;
+            text-align: center;
+            line-height: 25px;
+            margin-right: 5px;
+            margin-top: 5px;
+            border: 3px solid gray;
+        }
+
+
+        .color-list li:nth-child(1) {
+            background-color: black;
+            border: 3px solid black;
+            border-radius: 999px;
+        }
+
+        .color-list li:nth-child(2) {
+            background-color: red;
+        }
+
+        .color-list li:nth-child(3) {
+            background-color: orange;
+        }
+
+        .color-list li:nth-child(4) {
+            background-color: yellow;
+        }
+
+        .color-list li:nth-child(5) {
+            background-color: green;
+        }
+
+        .color-list li:nth-child(6) {
+            background-color: blue;
+        }
+
+        .draw .draw-controller .draw-btn {
+            width: 100%;
+            height: 30px;
+        }
+
+        .draw .draw-controller .draw-btn .selected-color,
+        .draw .draw-controller .draw-btn .color,
+        .draw .draw-controller .draw-btn .width,
+        .draw .draw-controller .draw-btn .selected-width {
+            line-height: 30px;
+        }
+
+        .draw-btn .clear-canvas {
+            float: left;
+            padding: 2px 5px;
+            margin-right: 10px;
+        }
+
+        .draw-btn .eraser {
+            float: right;
+            padding: 2px 5px;
+            margin-right: 5px;
+        }
+
+        .selected-color {
+            color: black;
+            margin-right: 10px;
+        }
+
+        .width-list li:nth-child(1) {
+            border-radius: 999px;
+            border: 3px solid black;
+            background-color: pink;
+        }
+
+        .draw .state {
+            position: absolute;
+            top: 10px;
+            right: 5px;
+        }
+
+        .draw .state-value {
+            display: inline-block;
+            width: 48px;
+            height: 21px;
+        }
+
+        .save-btn {
+            margin: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 
+
+    画板中可以选择画板颜色，选择不同颜色画笔可以画出不同颜色的线条
+    选择不同颜色，画板会提示显示你当前选择了什么颜色
+    画板提供清空画布功能，点击可以清空画布上的图案
+    画板提供橡皮擦功能，点击后画笔颜色为白色可以擦去画板的颜色
+    用户可以点击画布移动鼠标进行绘画，当鼠标松开时停止绘画 -->
+    <div class="draw">
+        <div class="draw-controller">
+            <div class="draw-choose-color">
+                <span>请选择画笔颜色：</span>
+                <ul class="color-list">
+                    <li class="color" data-color="black" data-text="黑色"></li>
+                    <li class="color" data-color="red" data-text="红色"></li>
+                    <li class="color" data-color="orange" data-text="橙色"></li>
+                    <li class="color" data-color="yellow" data-text="黄色"></li>
+                    <li class="color" data-color="green" data-text="绿色"></li>
+                    <li class="color" data-color="blue" data-text="蓝色"></li>
+                </ul>
+            </div>
+            <div class="draw-choose-width">
+                <span>请选择画笔宽度：</span>
+                <ul class="width-list">
+                    <li class="width" data-width="1">1</li>
+                    <li class="width" data-width="2">2</li>
+                    <li class="width" data-width="3">3</li>
+                    <li class="width" data-width="4">4</li>
+                    <li class="width" data-width="5">5</li>
+                    <li class="width" data-width="6">6</li>
+                    <li class="width" data-width="7">7</li>
+                    <li class="width" data-width="8">8</li>
+                    <li class="width" data-width="9">9</li>
+                    <li class="width" data-width="10">10</li>
+                </ul>
+            </div>
+            <div class="draw-btn">
+                <button class="clear-canvas">清除画布</button>
+                <span class="color">当前所选颜色为：</span><span class="selected-color" data-color="black">黑色</span>
+                <span class="width">当前所选宽度为：</span><span class="selected-width" data-width="1">1</span>
+                <button class="eraser">橡皮擦</button>
+            </div>
+        </div>
+        <div class="draw-board">
+            <canvas id="canvas" width="500" height="300"></canvas>
+        </div>
+        <div class="state">
+            当前状态:
+            <div class="state-value">作画</div>
+        </div>
+    </div>
+    <div class="save-btn">
+        <a href="" download="/images/image.jpeg">下载</a>
+    </div>
+    <script>
+        let colorList = document.querySelector(".color-list");
+        let colorLis = document.querySelectorAll(".color-list li");
+        let widthList = document.querySelector(".width-list");
+        let widthLis = document.querySelectorAll(".width-list li");
+        let clearCanvas = document.querySelector(".clear-canvas");
+        let selectedColor = document.querySelector(".selected-color");
+        let selectedWidth = document.querySelector(".selected-width")
+        let eraser = document.querySelector(".eraser");
+        let canvas = document.querySelector("#canvas");
+        let stateValue = document.querySelector(".state-value");
+        let saveCanvas = document.querySelector(".save-btn")
+        let img = document.querySelector("img")
+        let useEraser = false;
+
+        let ctx = canvas.getContext("2d")
+
+        colorList.onclick = function (e) {
+            if (e.target.className == "color") {
+                stateValue.textContent = "作画";
+                useEraser = false;
+                for (let i = 0; i < colorLis.length; i++) {
+                    if (e.target.dataset.color == colorLis[i].dataset.color) {
+                        colorLis[i].style.border = "3px solid black";
+                        colorLis[i].style.borderRadius = "999px";
+                        let text = colorLis[i].dataset.text;
+                        let color = colorLis[i].dataset.color;
+                        selectedColor.dataset.color = color;
+                        selectedColor.textContent = text;
+                        selectedColor.style.color = color;
+                    } else {
+                        colorLis[i].style.border = "3px solid gray";
+                        colorLis[i].style.borderRadius = "0px";
+                    }
+                }
+            }
+        }
+
+        widthList.onclick = function (e) {
+            if (e.target.className == "width") {
+                stateValue.textContent = "作画";
+                useEraser = false;
+                for (let i = 0; i < widthLis.length; i++) {
+                    if (e.target.dataset.width == widthLis[i].dataset.width) {
+                        widthLis[i].style.border = "3px solid black";
+                        widthLis[i].style.borderRadius = "999px";
+                        widthLis[i].style.backgroundColor = "pink";
+                        let width = widthLis[i].dataset.width;
+                        selectedWidth.dataset.width = width;
+                        selectedWidth.textContent = width;
+                    } else {
+                        widthLis[i].style.border = "3px solid gray";
+                        widthLis[i].style.borderRadius = "0px";
+                        widthLis[i].style.backgroundColor = "white";
+                    }
+                }
+
+            }
+        }
+
+        // 清除画布
+        clearCanvas.onclick = function (e) {
+            ctx.clearRect(0, 0, 500, 300);
+            useEraser = false;
+            stateValue.textContent = "作画";
+        }
+
+        // 橡皮擦
+        eraser.onclick = function () {
+            useEraser = true;
+            stateValue.textContent = "橡皮擦";
+        }
+
+        // 画布点击作画
+        canvas.onmousedown = function (e) {
+            let x = e.offsetX;
+            let y = e.offsetY;
+
+            ctx.beginPath();
+            ctx.strokeStyle = selectedColor.dataset.color;
+            ctx.lineWidth = selectedWidth.dataset.width;
+            ctx.moveTo(x, y);
+            canvas.onmousemove = function (evt) {
+                let mx = evt.offsetX
+                let my = evt.offsetY
+                if (!useEraser) {
+                    ctx.lineTo(mx, my);
+                    ctx.stroke()
+                } else {
+                    ctx.clearRect(mx, my, 20, 20);
+                }
+            }
+
+            canvas.onmouseup = function () {
+                canvas.onmousemove = null;
+            }
+            canvas.onmouseleave = function () {
+                canvas.onmousemove = null;
+            }
+        }
+
+        saveCanvas.onclick = function () {
+            console.log("保存画布");
+            let url = canvas.toDataURL('image/png', 1)
+            let a = document.querySelector('a')
+            console.log(url);
+            a.href = url
+            a.click() // 触发点击, a的用途是下载,js触发点击等于自动下载
+
+            // let imgURL = canvas.toDataURL({ format: "image/png", quality: 1, width: 12000, height: 4000 });
+            // let dlLink = document.createElement('a');
+            // dlLink.download = "fileName";
+            // dlLink.href = imgURL;
+            // dlLink.dataset.downloadurl = [MIME_TYPE, dlLink.download, dlLink.href].join(':');
+            // document.body.appendChild(dlLink);
+            // dlLink.click();
+            // document.body.removeChild(dlLink);
+        }
+    </script>
+</body>
+
+</html>

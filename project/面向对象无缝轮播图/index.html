@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 先引入animate.js 再引入 carousel.js , carousel中使用了animate.js提供的api -->
+    <script src="./tool/animate.js"></script>
+    <script src="./tool/carousel.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            box-sizing: border-box;
+        }
+
+        #app {
+            width: 1160px;
+            height: 332px;
+            margin: 10px auto;
+        }
+
+        .carousel {
+            position: relative;
+            width: 1160px;
+            height: 332px;
+            overflow: hidden;
+        }
+
+        .carousel ul {
+            position: absolute;
+            /* 父元素宽度的10倍,至多能放十张图 */
+            width: 1000%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .carousel ul li {
+            float: left;
+            width: 10%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+    </div>
+    <script>
+        var app = document.getElementById('app')
+
+        var images = ["./imgs/1.jpg", "./imgs/2.jpg", "./imgs/3.jpg", "./imgs/4.jpg", "./imgs/5.jpg"]
+
+        new Carousel(images, app)
+
+    </script>
+</body>
+
+</html>

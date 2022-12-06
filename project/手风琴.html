@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .box {
+            margin: 20px auto;
+            width: 1200px;
+            overflow: hidden;
+        }
+
+        .box ul {
+            overflow: hidden;
+            width: 2000px ;
+        }
+
+        .box ul li {
+            position: relative;
+            float: left;
+            width: 200px;
+            height: 260px;
+        }
+
+        .box .des {
+            position: absolute;
+            display: flex;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .box .des h3 {
+            margin: auto;
+            width: 30px;
+            font-size: 30px;
+            color: #fff;
+
+        }
+
+        .box .img {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+    <script src="../jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+    <div class="box">
+        <ul>
+            <li>
+                <div class="des">
+                    <h3>园林酒店</h3>
+                </div>
+                <div class="img" style="background: url(./img/1.jpg) center;"></div>
+            </li>
+            <li>
+                <div class="des">
+                    <h3>设计师酒店</h3>
+                </div>
+                <div class="img" style="background: url(./img/2.jpg) center;"></div>
+            </li>
+            <li>
+                <div class="des">
+                    <h3>青年旅社</h3>
+                </div>
+                <div class="img" style="background: url(./img/3.jpg) center;"></div>
+            </li>
+            <li>
+                <div class="des">
+                    <h3>特色客栈</h3>
+                </div>
+                <div class="img" style="background: url(./img/4.jpg) center;"></div>
+            </li>
+            <li>
+                <div class="des">
+                    <h3>海岛酒店</h3>
+                </div>
+                <div class="img" style="background: url(./img/5.jpg) center;"></div>
+            </li>
+            <li>
+                <div class="des">
+                    <h3>
+                        海外温泉
+                    </h3>
+                </div>
+                <div class="img" style="background: url(./img/6.jpg) center;"></div>
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        $('.box').on('mouseenter', 'li', function () {
+            $(this).find('.des').stop(true).fadeOut()
+            $(this).stop(true).animate({ width: 400 }).siblings().stop(true).animate({ width: 160 })
+        }).on('mouseleave', 'li', function () {
+            $(this).find('.des').stop(true).fadeIn()
+            $(this).stop(true).animate({ width: 200 }).siblings().stop(true).animate({ width: 200 })
+        })
+    </script>
+</body>
+
+</html>

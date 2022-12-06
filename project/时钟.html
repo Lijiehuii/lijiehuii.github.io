@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+        #time {
+            font-size: 50px;
+            text-shadow: 10px 10px 5px gray;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="time"></div>
+
+    <script type="text/javascript">
+
+        function changeTime() {
+            var d = new Date();
+            var year = d.getFullYear();
+            var month = d.getMonth() + 1;
+            var day = d.getDate();
+            var hour = d.getHours();
+            var minute = d.getMinutes();
+            var second = d.getSeconds();
+            var str = year + "年" + month + "月" + day + "日" + hour + ":" + minute + ":" + second;
+            document.getElementById("time").innerHTML = str;
+
+            window.setTimeout(changeTime, 1000);
+        }
+
+        changeTime();
+
+    </script>
+</body>
+
+</html>

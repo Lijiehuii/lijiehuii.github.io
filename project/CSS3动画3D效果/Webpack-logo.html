@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>作业一：webpack-logo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        body {
+            background-color: #2B3A42;
+        }
+
+        .container {
+            display: flex;
+            margin: 200px auto;
+            width: 400px;
+            height: 400px;
+        }
+
+        .container .box {
+            display: flex;
+            margin: auto;
+            width: 300px;
+            height: 300px;
+            transform: rotateX(-35deg) rotateY(45deg);
+            transform-style: preserve-3d;
+        }
+
+        .container .box .bigbox {
+            position: absolute;
+            margin: auto;
+            width: 300px;
+            height: 300px;
+            transform-style: preserve-3d;
+            animation: bigBox3DAnimate 2s linear infinite;
+            /* animation-play-state: paused; */
+            /* transition: animation .5s linear; */
+        }
+
+        .container .box .bigbox div {
+            box-sizing: border-box;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 300px;
+            height: 300px;
+            opacity: .7;
+            border: 5px solid #fff;
+            background: rgba(141, 214, 249, 0.5);
+        }
+
+        .container .box .bigbox div:nth-child(1) {
+            transform: translateZ(150px);
+        }
+
+        .container .box .bigbox div:nth-child(2) {
+            transform: rotateY(180deg) translateZ(150px);
+        }
+
+        .container .box .bigbox div:nth-child(3) {
+            transform: rotateY(90deg) translateZ(150px);
+        }
+
+        .container .box .bigbox div:nth-child(4) {
+            transform: rotateY(-90deg) translateZ(150px);
+        }
+
+        .container .box .bigbox div:nth-child(5) {
+            transform: rotateX(90deg) translateZ(150px);
+        }
+
+        .container .box .bigbox div:nth-child(6) {
+            transform: rotateX(-90deg) translateZ(150px);
+        }
+
+        .container .box .smallbox {
+            position: relative;
+            margin: auto;
+            width: 150px;
+            height: 150px;
+            transform-style: preserve-3d;
+            animation: smallBox3DAnimate 2s linear infinite;
+            /* animation-play-state: paused; */
+            /* transition: animation .5s linear; */
+        }
+
+        .container .box .smallbox div {
+            box-sizing: border-box;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 150px;
+            height: 150px;
+            opacity: .7;
+            border: 5px solid #fff;
+            background-color: #1D78C1;
+        }
+
+        .container .box .smallbox div:nth-child(1) {
+            transform: translateZ(75px);
+        }
+
+        .container .box .smallbox div:nth-child(2) {
+            transform: rotateY(180deg) translateZ(75px);
+        }
+
+        .container .box .smallbox div:nth-child(3) {
+            transform: rotateY(90deg) translateZ(75px);
+        }
+
+        .container .box .smallbox div:nth-child(4) {
+            transform: rotateY(-90deg) translateZ(75px);
+        }
+
+        .container .box .smallbox div:nth-child(5) {
+            transform: rotateX(90deg) translateZ(75px);
+        }
+
+        .container .box .smallbox div:nth-child(6) {
+            transform: rotateX(-90deg) translateZ(75px);
+        }
+
+        @keyframes bigBox3DAnimate {
+            from {
+                transform: rotate3d(0, 1, 0, 0deg);
+            }
+
+            50%,100% {
+                transform: rotate3d(0, 1, 0, 90deg);
+
+            }
+        }
+
+        @keyframes smallBox3DAnimate {
+            from {
+                transform: rotate3d(0, 1, 0, 0deg);
+            }
+
+            50%,100% {
+                transform: rotate3d(0, 1, 0, -90deg);
+
+            }
+        }
+
+        /* @keyframes bigBox3DAnimate1 {
+            from {
+                transform: rotate3d(0, 1, 0, 90deg);
+            }
+
+            50%,100% {
+                transform: rotate3d(0, 1, 0, 180deg);
+
+            }
+        }
+
+        @keyframes smallBox3DAnimate1 {
+            from {
+                transform: rotate3d(0, 1, 0, -90deg);
+            }
+
+            50%,100% {
+                transform: rotate3d(0, 1, 0, -180deg);
+
+            }
+        } */
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="box">
+            <div class="bigbox">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <div class="smallbox">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // let bigBox = document.querySelector(".bigbox");
+        // console.log(bigBox);
+        // let smallBox = document.querySelector(".smallbox");
+        // console.log(smallBox);
+
+        // bigBox.onanimationend = function () {
+        //     // bigBox.style.animation = "bigBox3DAnimate 1s linear 1";
+        //     console.log(123);
+        // }
+
+        // smallBox.onanimationend = function () {
+        //     // smallBox.style.animation = "smallBox3DAnimate 1s linear 1";
+        //     console.log(123);
+
+        // }
+
+        // let flag = true;
+        // setInterval(function () {
+        //     flag = !flag
+        //     if (flag == true) {
+        //         // bigBox.style.animationPlayState = "running"
+        //         // smallBox.style.animationPlayState = "running"
+
+        //         bigBox.style.animation = "bigBox3DAnimate 1s linear 1";
+        //         smallBox.style.animation = "smallBox3DAnimate 1s linear 1";
+        //     } else {
+        //         // bigBox.style.animationPlayState = "paused";
+        //         // smallBox.style.animationPlayState = "paused";
+
+        //         bigBox.style.animation = "bigBox3DAnimate1 1s linear 1";
+        //         smallBox.style.animation = "smallBox3DAnimate1 1s linear 1";
+        //     }
+        // }, 2000)
+
+
+    </script>
+</body>
+
+</html>

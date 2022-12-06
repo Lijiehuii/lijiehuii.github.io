@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="big_box">
+        <div class="result">
+            <h1>得分:</h1>
+            <span>0</span>
+        </div>
+        <div class="box">
+
+        </div>
+        <div class="messages">GAME OVER</div>
+        <button id="star">开始游戏</button>
+
+    </div>
+    <style>
+        .big_box {
+            width: 400px;
+            text-align: center;
+            position: relative;
+            margin: 10px auto;
+        }
+
+        .big_box .messages {
+            font-size: 3em;
+            color: red;
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            left: calc(50% - 150px);
+            display: none;
+            font-weight: bolder;
+        }
+
+        .big_box .result span {
+            width: 130px;
+            height: 50px;
+            border: 3px solid rgb(0, 0, 0);
+            text-align: center;
+            line-height: 50px;
+            font-size: 1.5em;
+            color: red;
+
+        }
+
+        .big_box .result {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .big_box button {
+            width: 150px;
+            height: 50px;
+            background-color: aqua;
+            font-size: 1.5em;
+            border: none;
+            color: rgb(53, 51, 49);
+            margin-top: 10px;
+            cursor: pointer;
+            border-radius: 20px;
+
+        }
+
+        .box {
+            width: 400px;
+            height: 600px;
+            background-color: #333;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+            overflow: hidden;
+
+        }
+
+        .box ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            display: flex;
+            flex-wrap: wrap;
+            height: 150px;
+            transition: all, 1300ms;
+
+        }
+
+        .box ul li {
+            margin: 0;
+            padding: 0;
+            width: 100px;
+            height: 150px;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+
+        var btnStr = document.getElementById("star")
+        var messages = document.querySelector(".big_box .messages")
+
+
+        btnStr.onclick = function gamestar() {
+            var scores = document.querySelector(".big_box .result span")
+
+            scores.innerHTML = "0";
+
+            var boxObj = document.querySelector(".box")
+            var counts = 0;
+            var speed = 400;
+            boxObj.innerHTML = " ";
+            messages.style.display = "none"
+
+            function colors(n) {
+                n.forEach(function (row, i) {
+                    for (let i = 0; i < 4; i++) {
+                        var newli = document.createElement("li")
+                        row.appendChild(newli)
+                    }
+                    // console.log(row);
+                    if (i == 0) {
+                        var lines = row.querySelectorAll("li")
+                        var nums = Math.floor(Math.random() * 4)
+                        lines[nums].style.backgroundColor = "#fff"
+
+
+                        var removeCl = setTimeout(function () {
+                            var Cl = setInterval(function () {
+                                var uls = document.querySelectorAll(".box ul")
+                                // console.log(uls);
+                                var lastnum = uls.length - 1
+                                // console.log(uls[lastnum]);
+                                // 删除
+                                lines[nums].onclick = function () {
+                                    boxObj.removeChild(uls[lastnum])
+                                    //  得分    
+                                    counts++
+
+                                    scores.innerHTML = counts
+                                    // speed = 1000 - (counts * 5)
+
+                                }
+                                //  结束
+                                console.log(uls.length);
+                                if (uls.length > 5) {
+                                    clearInterval(stard)
+                                    messages.style.display = "block";
+                                    btnStr.innerText = "重新开始"
+
+                                }
+                            }, 100);
+                        }, speed);
+                    }
+                });
+            }
+
+            var stard = setInterval(function () {
+
+                //  给ul添加li
+                var newul = document.createElement("ul");
+                var firstUl = boxObj.getElementsByTagName("ul")[0]
+                boxObj.insertBefore(newul, firstUl)
+
+                var rows = document.querySelectorAll(".box ul");
+                colors(rows)
+
+                var uls = document.querySelectorAll(".box ul")
+                // console.log(uls);
+                uls.forEach(function (ul, i) {
+                    if (i == 0) {
+                        ul.style.marginTop = "-150px";
+                    }
+                    else {
+                        ul.style.marginTop = "0"
+                    }
+                })
+                // uls[length-1].onclick = function () {
+
+                // }
+
+            }, speed);
+
+        }
+
+
+
+    </script>
+
+</body>
+
+</html>

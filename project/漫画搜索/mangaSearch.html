@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="referrer" content="never">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>漫画搜索</title>
+    <script src="./jquery-3.6.0.min.js"></script>
+    <script src="./axios.min.js"></script>
+    <script src="./search.js"></script>
+    <script src="./manga.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        #app {
+            width: 100vw;
+            height: 100vh;
+            overflow: auto;
+        }
+
+        .search-nav {
+            position: relative;
+            width: 100vw;
+            height: 5vh;
+            text-align: center;
+            margin: 5vw auto;
+        }
+
+        .search-nav div {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5vh;
+            height: 5vh;
+            text-align: center;
+            line-height: 5vh;
+        }
+
+        .search-nav div img {
+            width: 5vh;
+            height: 5vh;
+        }
+
+        .search-nav .search {
+            padding: 0 10px;
+            text-indent: 10vw;
+            font-size: 24px;
+            width: 80%;
+            height: 100%;
+            border-radius: 99px;
+        }
+
+        #output {
+            box-sizing: border-box;
+            display: flex;
+            flex-wrap: wrap;
+            padding: 0 2vw;
+        }
+
+        #output .search-item {
+            box-sizing: border-box;
+            padding: 2vw;
+            width: 32vw;
+            height: 24vh;
+        }
+
+        #output .search-item img {
+            display: block;
+            width: 100%;
+            height: 80%;
+        }
+
+        #output .search-item .title {
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+
+        #output .search-item .style {
+            color: #999;
+        }
+
+        ul {
+            background-color: #fff;
+        }
+
+        ul>li {
+            margin: 2vw 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="search-nav">
+            <!-- <div><img src="./search.svg"></div> -->
+        </div>
+        <div id="output">
+        </div>
+    </div>
+    <script>
+        $(function () {
+            let $app = $('#app .search-nav')
+
+            let manga = new Manga($('#output'))
+
+            function setMangaList(val) {
+                manga.mangaList = val
+            }
+
+            new SearchBar($app, setMangaList)
+
+        })
+
+    </script>
+</body>
+
+</html>

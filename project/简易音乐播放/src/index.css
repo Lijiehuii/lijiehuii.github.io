@@ -1,0 +1,326 @@
+.wangyi-music {
+    width: 100vw;
+    height: 100%;
+    position: relative;
+}
+
+.wangyyi-newsongs {
+    width: 100vw;
+    height: 100%;
+    display: block;
+}
+
+.wangyyi-newsongs header {
+    width: 100vw;
+    height: 124px;
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 999;
+}
+
+.wangyyi-newsongs header .wangyi-music {
+    width: 100%;
+    height: 100%;
+    background-color: #d43c33;
+    z-index: 999;
+}
+
+.wangyyi-newsongs header .wangyi-music .wangyi-music-top {
+    box-sizing: border-box;
+    display: flex;
+    width: 100vw;
+    height: 84px;
+    padding: 0 10px;
+    justify-content: space-between;
+}
+
+.wangyyi-newsongs header .wangyi-music .wangyi-music-top .wangyi-music-name {
+    width: 142px;
+    line-height: 84px;
+    font-size: 18px;
+    color: #fff;
+}
+
+.wangyyi-newsongs header .wangyi-music .wangyi-music-top .wangyi-music-name i {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background-color: #fff;
+    margin-right: 10px;
+    transform: translateY(25%);
+}
+
+.wangyyi-newsongs header .wangyi-music .wangyi-music-top .wangyi-music-download {
+    width: 100px;
+    height: 36px;
+    transform: translateY(75%);
+    line-height: 36px;
+    text-align: center;
+    border-radius: 999px;
+    color: #d43c33;
+    background-color: #fff;
+    font-size: 16px;
+}
+
+.wangyyi-newsongs header .wangyi-music .wangyi-music-list {
+    width: 100vw;
+    overflow: hidden;
+}
+
+.wangyyi-newsongs header .wangyi-music .wangyi-music-list ul>li {
+    width: calc(100vw / 3);
+    height: 40px;
+    float: left;
+    background-color: #fff;
+}
+
+.wangyyi-newsongs header .wangyi-music .wangyi-music-list ul>li span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+}
+
+.wangyyi-newsongs header .wangyi-music .wangyi-music-list ul>li .middle-list {
+    box-sizing: border-box;
+    color: #dd001b;
+    margin: 0 auto;
+    width: 55px;
+    border-bottom: 3px solid #dd001b;
+}
+
+.newsongs .newsongs-bg {
+    position: relative;
+    box-sizing: border-box;
+    width: 100vw;
+    height: 146px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 20px;
+    background-image: url(../images/精灵图背景.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.newsongs .newsongs-bg::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: " ";
+    width: 100vw;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .1);
+}
+
+.newsongs .newsongs-pic {
+    width: 142px;
+    height: 67px;
+    background-image: url(../images/精灵图.png);
+    background-position: -20px -20px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: 1;
+}
+
+.newsongs .newsongs-bg .update {
+    margin-top: 10px;
+    font-size: 12px;
+    color: #fff;
+}
+
+.newsongs .newsongs-list {
+    box-sizing: border-box;
+    width: 100vw;
+    height: 100%;
+    padding-left: 10px;
+}
+
+.newsongs .newsongs-list .list-song {
+    box-sizing: border-box;
+    display: flex;
+    width: 100%;
+    height: 55.5px;
+}
+
+.newsongs .newsongs-list .list-song .rank {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 55.5px;
+    margin-left: -10px;
+    font-size: 17px;
+    color: #999;
+}
+
+.newsongs .newsongs-list .list-song .rank.hot {
+    color: #df3436;
+}
+
+.newsongs .newsongs-list .list-song .song {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    border-bottom: 1px solid rgba(124, 122, 122, 0.2);
+}
+
+.newsongs .newsongs-list .list-song .song-desc {
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    padding: 10px 0;
+}
+
+.newsongs .newsongs-list .list-song .song-desc .song-name {
+    width: 70vw;
+    height: 25.5px;
+    box-sizing: border-box;
+    font-size: 17px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-break: normal;
+    color: #333;
+}
+
+.newsongs .newsongs-list .list-song .song-desc .song-author {
+    width: 100%;
+    height: 18px;
+    font-size: 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-break: normal;
+    color: #888;
+}
+
+.newsongs .newsongs-list .list-song .song-desc .song-author i {
+    display: inline-block;
+    width: 12px;
+    height: 8px;
+    margin-right: 4px;
+    background-image: url(../images/精灵图.png);
+    background-repeat: no-repeat;
+    background-size: 166px 97px;
+
+}
+
+.newsongs .newsongs-list .list-song .song-play-btn {
+    box-sizing: border-box;
+    width: 42px;
+    height: 55.5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 10px;
+}
+
+.newsongs .newsongs-list .list-song .song-play-btn span {
+    display: block;
+    width: 22px;
+    height: 22px;
+    background-image: url(../images/精灵图.png);
+    background-repeat: no-repeat;
+    background-size: 166px 97px;
+    background-position: -24px 0;
+}
+
+.songplay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    background-color: rgba(0, 0, 0, .6);
+}
+
+.songplay .songPlay-top {
+    display: flex;
+    width: 100vw;
+    height: 50px;
+    background-color: #d43c33;
+}
+
+.songplay .songPlay-top .return {
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    font-size: 36px;
+    color: #fff;
+    z-index: 999;
+}
+
+.songplay .songPlay-top .song-play-name {
+    width: 100%;
+    height: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    line-height: 50px;
+    text-align: center;
+    color: #fff;
+    font-size: 26px;
+    margin-left: -50px;
+    padding: 0 50px;
+}
+
+.songplay .song {
+    position: relative;
+    width: 100vw;
+    height: 77.5vh;
+    font-size: 18px;
+    overflow: hidden;
+    text-align: center;
+    padding: 50px 0;
+}
+
+.songplay .song .line {
+    position: absolute;
+    width: 100vw;
+    height: 1px;
+    top: 50%;
+    background-color: #df3436;
+}
+
+.songplay .song .song-lryic {
+    box-sizing: border-box;
+    display: flex;
+    width: 100vw;
+    height: 60vh;
+}
+
+.songplay .song .song-lryic .song-lryic-list {
+    width: 100vw;
+    height: 60vh;
+    transform: translateY(250px);
+    transition: transform .5s linear;
+}
+
+.songplay .song .song-lryic .song-lryic-list p {
+    margin: 0 auto;
+    width: 300px;
+    height: 18px;
+    margin-bottom: 8px;
+    overflow: hidden;
+}
+
+.songplay .song .song-lryic .song-lryic-list p.active {
+    color: #fff;
+}
+
+.songplay .song .song-audio {
+    width: 100vw;
+    height: 30vh;
+}
+
+.songplay .song .song-audio .audio {
+    width: 100vw;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}

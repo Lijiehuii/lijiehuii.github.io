@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .video-box {
+            position: relative;
+            width: 240px;
+            overflow: hidden;
+            margin: 10px auto;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        /* 鼠标悬停时,罩层 */
+        .video-container .video-cover {
+            display: none;
+            flex-direction: column;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .video-box:hover .video-cover {
+            display: flex;
+        }
+
+        /* 设置伪类给图片区域添加阴影罩层 */
+        .video-container .video-cover::after {
+            display: block;
+            position: absolute;
+            left: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(7, 17, 27, 0.3);
+            content: ' ';
+        }
+
+        .video-container .video-cover .progress {
+            position: relative;
+            width: 100%;
+            border: 7px solid black;
+            border-bottom-width: 5px;
+            background-color: #777;
+            z-index: 2;
+        }
+
+        .video-container .video-cover .progress-line {
+            display: block;
+            width: 0%;
+            height: 3px;
+            background-color: #fff;
+        }
+
+        .video-container .video-cover .video-storyboard {
+            flex: 1;
+            width: 240px;
+            height: 135px;
+            background-image: url(./736496090_e3c45b-0001.jpg);
+            background-size: 2400px 1350px;
+        }
+
+        .video-container .video-cover .danmu-module {
+            position: absolute;
+            left: 0;
+            top: 15px;
+            height: 135px;
+            width: 100%;
+        }
+
+        .video-container .video-cover .dm {
+            position: absolute;
+            right: -500px;
+            color: #fff;
+            z-index: 3;
+            white-space: nowrap;
+        }
+
+        .video-container .video-cover .video-duration {
+            position: absolute;
+            left: 10px;
+            bottom: 5px;
+            font-size: 14px;
+            color: #fff;
+            z-index: 5;
+        }
+
+        .video-container img {
+            display: block;
+            width: 100%;
+        }
+
+        .video-title {
+            margin-top: 10px;
+            padding: 0 3px;
+            font-size: 14px;
+            line-height: 18px;
+        }
+
+        .video-play-count {
+            display: flex;
+            position: absolute;
+            bottom: 0px;
+            padding: 0 5px;
+            width: 100%;
+            font-size: 13px;
+            color: rgba(7, 17, 27, 0.6);
+            background-color: #fff;
+        }
+
+        .video-play-count div {
+            flex: 1;
+        }
+
+        .js-mouse-move {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: transparent;
+            z-index: 999;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="video-box">
+        <div class="video-container">
+            <img src="./preview.jpg" alt="4k">
+            <div class="video-cover">
+                <div class="progress">
+                    <span class="progress-line"></span>
+                </div>
+                <div class="video-storyboard">
+                </div>
+                <div class="danmu-module">
+                    <p class="dm">这味，正宗</p>
+                    <p class="dm row2">太</p>
+                    <p class="dm">最美齐天大圣</p>
+                    <p class="dm row2">云彩是故宫祥云图案，音乐是中国古典乐器，这才是中国的动画</p>
+                    <p class="dm">最美大圣</p>
+                    <p class="dm row2">猴哥</p>
+                    <p class="dm">世外桃源般的联想</p>
+                    <p class="dm row2">真美</p>
+                    <p class="dm">略过了学艺那一段，都有孙悟空的名字了</p>
+                    <p class="dm row2">是不是音画不同步</p>
+                    <p class="dm">这一幕像极了戏剧开幕</p>
+                    <p class="dm row2">水帘</p>
+                    <p class="dm">猴子成精了</p>
+                    <p class="dm row2">优雅</p>
+                    <p class="dm">音乐 欲扬先抑</p>
+                    <p class="dm row2">这才是传统中国艺术</p>
+                    <p class="dm">恬恬</p>
+                    <p class="dm row2">恬恬</p>
+                    <p class="dm">好美啊</p>
+                </div>
+                <span class="video-duration">9:36</span>
+            </div>
+        </div>
+        <div class="video-title">
+            【4K修复完整版】【国产动画】大闹天宫 上美
+        </div>
+        <div class="video-play-count">
+            <div> 2.7万播放</div>
+            <div> 93弹幕</div>
+        </div>
+        <div class="js-mouse-move"></div>
+    </div>
+</body>
+
+<script>
+    var videoBox = document.querySelector('.video-box')
+
+    var videoPlayCount = videoBox.querySelector('.video-play-count')
+
+    // 功能一鼠标悬停,动画的隐藏videoPlayCount
+    videoBox.onmouseenter = function () {
+        toggleVideoPlayCount(true)
+
+        danmuRunning()
+    }
+
+    videoBox.onmouseleave = function () {
+        toggleVideoPlayCount()
+
+        clearInterval(videoBox.timer)
+    }
+
+    // 函数接受一个布尔值的参数isHidden,用来判断本次动画是隐藏还是显示
+    // isHidden == true 隐藏
+    // isHidden == false 显示
+    function toggleVideoPlayCount(isHidden) {
+        // 每次动画开始之前清除上一次的计时器
+        clearInterval(videoPlayCount.timer)
+
+        // 将计时器的timerID 绑定到元素对象上
+        videoPlayCount.timer = setInterval(function () {
+            var height = videoPlayCount.offsetHeight
+            var bottom = parseInt(videoPlayCount.style.bottom) || 0
+            // 元素移出元素/回到元素初始位置停止动画
+            if (isHidden ? bottom <= -height : bottom >= 0) {
+                clearInterval(videoPlayCount.timer)
+            }
+            bottom = isHidden ? bottom - 1 : bottom + 1
+            videoPlayCount.style.bottom = bottom + 'px'
+        }, 20)
+    }
+
+
+
+    // 功能二鼠标移动,图片切换,进度条更新
+    // 为了获取正确的offsetX,可以在元素上方加一个遮罩层,用于鼠标移动
+    var vBWidth = videoBox.getBoundingClientRect().width
+
+    // 获取进度条
+    var progressLine = videoBox.querySelector('.progress-line')
+
+    // 获取分镜元素
+    var videoStoryboard = videoBox.querySelector('.video-storyboard')
+
+
+    // 动态获取页面元素的指定样式值,该方法可以获取到元素真实样式值,包括通过css指定的样式
+    // window.getComputedStyle(videoStoryboard, null).width
+    // 获取分镜元素宽高对象
+    var vSRect = {
+        width: parseInt(getComputedStyle(videoStoryboard, null).width),
+        height: parseInt(getComputedStyle(videoStoryboard, null).height),
+    }
+
+    videoBox.onmousemove = function (e) {
+        // 获取当前鼠标相对于当前元素横轴偏移量
+        var x = e.offsetX
+        // 通过偏移量与元素的宽度,计算出当前鼠标在元素百分之几的值
+        // x / vBWidth 百分比小数 * 100 带小数的百分比形式, 再向下取整,就可以拿到正确的百分比
+        var xPercent = Math.round(x / vBWidth * 100)
+
+        progressLine.style.width = xPercent + '%'
+        // 分镜图片的展示, 首先先把xPercent改为0~99
+        // 图片的逻辑 对照10*10的图片,找到规律百分比的十位表示第几行,个位表示第几列
+        xPercent = xPercent === 100 ? 99 : xPercent
+        var row = Math.floor(xPercent / 10) // 获取十位
+        var col = xPercent % 10
+
+        // console.log(row,col);
+
+        var yPosition = -row * vSRect.height + 'px'
+        var xPosition = -col * vSRect.width + 'px'
+
+        // console.log(xPosition + ' ' + yPosition);
+
+        videoStoryboard.style.backgroundPosition = xPosition + ' ' + yPosition
+    }
+
+    // 需要动态获取方法,弹幕的下标索引位置会发生更改
+    var dms = videoBox.getElementsByClassName('dm')
+    var danmuModule = videoBox.querySelector('.danmu-module')
+
+    function danmuRunning() {
+
+        //  定义计数器,  setInterval每执行10次发射一个弹幕
+        var count = 0
+
+        videoBox.timer = setInterval(function () {
+
+            count = (count + 1) % 40
+
+            if (count === 39) {
+                //找一个弹幕让他发射
+                for (var i = 0; i < dms.length; i++) {
+                    var dm = dms[i]
+                    // 找一个还没有发射出的弹幕,发射他并结束循环
+                    if (!dm.isflying) {
+                        dm.isflying = true
+                        // 给弹幕模块随机速度
+                        dm.speed = Math.ceil(Math.random() * 3)
+                        dm.style.right = '-' + getComputedStyle(dm, null).width
+                        dm.style.top = Math.floor(Math.random() * 3) * 20 + 'px'
+
+                        // 为了避免前面的弹幕移动完毕,下一次从下标0遍历待命弹幕.总是取到前面的弹幕后面的没机会发射
+                        // 将发射的子弹放到数组最后
+                        danmuModule.appendChild(dm)
+                        break
+                    }
+                }
+            }
+
+
+
+            for (var i = 0; i < dms.length; i++) {
+                var dm = dms[i]
+                // 找到所有已经发射的子弹
+                if (dm.isflying) {
+                    var moveRight = parseInt(dm.style.right)
+                    // 弹幕已经飞出屏幕
+                    if (moveRight > vBWidth) {
+                        // 还原弹幕的状态
+                        dm.isflying = false
+
+                        continue
+                    }
+
+                    dm.style.right = moveRight + dm.speed + 'px'
+                }
+
+            }
+
+        }, 30)
+
+    }
+
+</script>
+
+</html>

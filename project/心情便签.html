@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=\, initial-scale=1.0">
+    <title>心情便签</title>
+    <style>
+        ul {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        p {
+            padding: 0;
+            margin: 0;
+        }
+
+        button,
+        input,
+        textarea {
+            border: 0;
+            outline: none;
+        }
+
+        body {
+            margin: 0;
+        }
+
+        .layout {
+            width: 560px;
+            margin: 0 auto;
+            height: 1000px;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+
+        .header>div textarea {
+            /* width: 100%; */
+            /* 改变盒子大小计算方式 */
+            /* box-sizing: border-box; */
+            width: 530px;
+            height: 60px;
+            resize: none;
+            border: 1px solid #ccc;
+            padding: 10px 15px;
+            font-size: 20px;
+        }
+
+        .header>div button {
+            width: 140px;
+            height: 40px;
+            background-color: #fff;
+            cursor: pointer;
+            float: right;
+        }
+
+        .header>div button:hover {
+            background-color: skyblue;
+        }
+
+        .clearfix::after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+
+        .list {
+            background-color: #fff;
+            margin: 10px 0 0 0;
+        }
+
+        .list ul {
+            padding: 15px 20px;
+        }
+
+        .list ul li {
+            border: 3px solid #ccc;
+            padding: 10px 10px;
+            position: relative;
+            margin: 0 0 10px 0;
+        }
+
+        .list ul li .txt {
+            font-size: 18px;
+            padding: 0 0 10px 0;
+        }
+
+        .list ul li .delete {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            cursor: pointer;
+            width: 30px;
+            height: 30px;
+        }
+
+        .list ul li .delete:hover {
+            background-color: #ccc;
+        }
+
+        .list ul li .currentTime {
+            font-size: 14px;
+            height: 30px;
+            line-height: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 要求：
+
+    点击发表按钮获取输入域的文本
+    把输入域的文本渲染在列标区域
+    把当前发表的时间显示在当前这条消息里面
+    点击“x”标签，直接删除当前这条消息
+    当输入域为空，不允许发表消息 -->
+    <div class="layout">
+        <div class="header clearfix">
+            <div>
+                <textarea id="textarea_box" placeholder="请输入此刻的心情"></textarea>
+            </div>
+            <div>
+                <button id="button_box">记录</button>
+            </div>
+        </div>
+        <div class="list">
+            <ul id="ul_box">
+                <!-- <li>
+                    <p class="txt">xxxx</p>
+                    <button class="delete">×</button>
+                    <div class="currentTime">2021-03-09 14:23:59</div>
+                </li> -->
+            </ul>
+        </div>
+    </div>
+    <script>
+        var textareaBox = document.getElementById('textarea_box');
+        var btnBox = document.getElementById('button_box');
+        var ulBox = document.getElementById('ul_box');
+
+
+
+        btnBox.addEventListener('click', function addEl() {
+
+            var textValue = textareaBox.value.trim();
+
+            if (!textValue) {
+
+                alert("请输入内容！");
+
+            } else {
+
+                var li = document.createElement('li');
+                var p = document.createElement('p');
+                var btnDel = document.createElement('button');
+                var curTime = document.createElement('div');
+
+                p.className = 'txt';
+                btnDel.className = 'delete';
+                curTime.className = 'currentTime';
+                p.textContent = textValue;
+                btnDel.textContent = 'X';
+                curTime.textContent = ti();
+
+                li.appendChild(p);
+                li.appendChild(btnDel);
+                li.appendChild(curTime);
+                ulBox.appendChild(li);
+
+                btnDel.addEventListener('dblclick', function test() {
+                    console.log(this.parentElement);
+                    this.parentElement.remove();
+                });
+
+                textareaBox.value = '';
+            }
+        });
+
+        var ti = function () {
+            var data = new Date();
+            var year = data.getFullYear();
+            var month = data.getMonth() + 1;
+            var day = data.getDate();
+            var hours = data.getHours();
+            var min = data.getMinutes();
+            var seconds = data.getSeconds();
+
+            month = addZero(month);
+            day = addZero(day);
+            hours = addZero(hours);
+            min = addZero(min);
+            hours = addZero(hours);
+            seconds = addZero(seconds);
+            time = year + "年" + month + "月" + day + "日 " + "   " + hours + ":" + min + ":" + seconds;
+            return time;
+        }
+
+        function addZero(num) {
+
+            return num >= 10 ? num : "0" + num;
+
+        }
+
+    </script>
+</body>
+
+</html>

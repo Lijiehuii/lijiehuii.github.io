@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="referrer" content="never">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BiliBili考核</title>
+    <link rel="stylesheet" href="./index.css">
+    <script src="./jquery-3.6.0.min.js"></script>
+    <script src="./NavControl.js"></script>
+    <script src="./bIli.ajax.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="styleId container">
+            <ul class="item">
+                <span class="title">题材</span>
+                <li class="active">全部</li>
+                <li>热血</li>
+                <li>古风</li>
+                <li>玄幻</li>
+                <li>悬疑</li>
+                <li>都市</li>
+                <li>历史</li>
+                <li>武侠仙侠</li>
+                <li>游戏竞技</li>
+                <li>悬疑灵异</li>
+                <li>架空</li>
+                <li>青春</li>
+                <li>西幻</li>
+                <li>现代</li>
+                <li>正能量</li>
+                <li>科幻</li>
+            </ul>
+        </div>
+        <div class="areaId container">
+            <ul class="item">
+                <span class="title">地区</span>
+                <li class="active">全部</li>
+                <li>大陆</li>
+                <li>日本</li>
+                <li>韩国</li>
+                <li>其他</li>
+            </ul>
+        </div>
+        <div class="isFinish container">
+            <ul class="item">
+                <span class="title">进度</span>
+                <li class="active">全部</li>
+                <li>连载</li>
+                <li>完结</li>
+            </ul>
+        </div>
+        <div class="isFree container">
+            <ul class="item">
+                <span class="title">收费</span>
+                <li class="active">全部</li>
+                <li>免费</li>
+                <li>付费</li>
+                <li>等就免费</li>
+            </ul>
+        </div>
+        <div class="order container">
+            <ul class="item">
+                <span class="title">排序</span>
+                <li class="active">人气推荐</li>
+                <li>更新时间</li>
+                <li>追漫人数</li>
+            </ul>
+        </div>
+
+    </header>
+    <div class="body">
+    </div>
+    <script>
+        console.log(jQuery == $);
+
+        var num1 = -1;
+        var num2 = -1;
+        var num3 = -1;
+        var num4 = -1;
+        var num5 = -1;
+
+        console.log(obj[0]["全部"]);
+
+        var url1 = 'https://apis.netstart.cn/bcomic/ClassPage?styleId=' + num1 + '&areaId=' + num2 + '&isFinish=' + num3 + '&order=' + num4 + '&pageNum=' + 1 + '&pageSize=' + 39 + '&isFree=' + num5
+
+        $('.styleId').on("click", "li", function () {
+            $(".body").text("");
+            $(this).addClass("active").siblings().removeClass("active");
+            var text1 = $(this).text()
+            var num = obj[0][text1];
+            num1 = num;
+            console.log(num1);
+            var url2 = 'https://apis.netstart.cn/bcomic/ClassPage?styleId=' + num1 + '&areaId=' + num2 + '&isFinish=' + num3 + '&order=' + num4 + '&pageNum=' + 1 + '&pageSize=' + 39 + '&isFree=' + num5
+            test(url2);
+        })
+
+        $('.areaId').on("click", "li", function () {
+            $(".body").text("");
+            $(this).addClass("active").siblings().removeClass("active");
+            var text2 = $(this).text()
+            var num = obj[1][text2]
+            num2 = num;
+            console.log(num2);
+            var url3 = 'https://apis.netstart.cn/bcomic/ClassPage?styleId=' + num1 + '&areaId=' + num2 + '&isFinish=' + num3 + '&order=' + num4 + '&pageNum=' + 1 + '&pageSize=' + 39 + '&isFree=' + num5
+            test(url3);
+        })
+
+        $('.isFinish').on("click", "li", function () {
+            $(".body").text("");
+            $(this).addClass("active").siblings().removeClass("active");
+            var text3 = $(this).text()
+            var num = obj[2][text3]
+            num3 = num;
+            console.log(num3);
+            var url4 = 'https://apis.netstart.cn/bcomic/ClassPage?styleId=' + num1 + '&areaId=' + num2 + '&isFinish=' + num3 + '&order=' + num4 + '&pageNum=' + 1 + '&pageSize=' + 39 + '&isFree=' + num5
+            test(url4);
+        })
+
+        $('.isFree').on("click", "li", function () {
+            $(".body").text("");
+            $(this).addClass("active").siblings().removeClass("active");
+            var text4 = $(this).text()
+            var num = obj[3][text4];
+            num4 = num;
+            console.log(num4);
+            var url5 = 'https://apis.netstart.cn/bcomic/ClassPage?styleId=' + num1 + '&areaId=' + num2 + '&isFinish=' + num3 + '&order=' + num4 + '&pageNum=' + 1 + '&pageSize=' + 39 + '&isFree=' + num5
+            test(url5);
+        })
+
+        $('.order').on("click", "li", function () {
+            $(".body").text("");
+            $(this).addClass("active").siblings().removeClass("active");
+            var text5 = $(this).text()
+            var num = obj[4][text5]
+            num5 = num;
+            console.log(num5);
+            var url6 = 'https://apis.netstart.cn/bcomic/ClassPage?styleId=' + num1 + '&areaId=' + num2 + '&isFinish=' + num3 + '&order=' + num4 + '&pageNum=' + 1 + '&pageSize=' + 39 + '&isFree=' + num5
+            test(url6);
+        })
+
+        function test(url1) {
+            $(".body").text("");
+            $.ajax({
+                url: url1,
+                type: 'GET',
+                timeout: 10000,
+                error: function (err) {
+                    console.log('请求失败', err);
+                },
+                success: function (data) {
+                    var data = data
+                    var nd = data.data;
+                    var imgs = [];
+                    var titles = [];
+                    var newhua = [];
+                    for (var i = 0; i < nd.length; i++) {
+                        imgs.push(data.data[i].horizontal_cover);
+                        titles.push(data.data[i].title);
+                        newhua.push(data.data[i].last_ord);
+                    }
+
+                    for (var i = 0; i < imgs.length; i++) {
+                        var $div1 = $('<div class="div1"></div>').appendTo($(".body"));
+                        var $div2 = $('<div class="div2"></div>').appendTo($div1);
+                        var $img = $('<img src="' + imgs[i] + '">').appendTo($div2);
+                        var $pname = $('<p class="name"></p>').text(titles[i]).appendTo($div1);
+                        var $pnew = $('<p class="new"></p>').text('更新至' + newhua[i] + '话').appendTo($div1);
+                    }
+                    console.log(url1);
+                }
+            })
+
+        }
+        test(url1)
+
+
+    </script>
+</body>
+
+</html>

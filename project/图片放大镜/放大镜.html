@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片放大镜</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            position: relative;
+            margin: 0 auto;
+            width: 900px;
+            height: 800px;
+            box-sizing: border-box;
+        }
+
+        .container .small {
+            position: relative;
+            box-sizing: border-box;
+            width: 350px;
+            height: 350px;
+        }
+
+        .container .small img {
+            width: 350px;
+            height: 350px;
+        }
+
+        .container .small .m {
+            display: block;
+            width: 350px;
+            height: 350px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            background-color: rgba(100, 100, 100, 0);
+            z-index: 99;
+        }
+
+        .container .small .fangdajing {
+            position: absolute;
+            display: none;
+            left: 0;
+            top: 0;
+            width: 200px;
+            height: 200px;
+            background-color: rgba(244, 196, 39, 0.3);
+        }
+
+        .container .big {
+            position: absolute;
+            top: 0;
+            right: 0;
+            box-sizing: border-box;
+            display: none;
+            width: 540px;
+            height: 540px;
+            overflow: hidden;
+        }
+
+        .container .big img {
+            position: absolute;
+            width: 1050px;
+            height: 1050px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <div class="container">
+        <div class="small">
+            <img src="./1.jpg" class="smallImg">
+            <div class="m"></div>
+            <div class="fangdajing"></div>
+        </div>
+        <div class="big">
+            <img src="./1.jpg" class="bigImg">
+        </div>
+    </div> -->
+
+    <div id="demo1">
+
+    </div>
+    <div id="demo2">
+
+    </div>
+    <div id="demo3">
+
+    </div>
+    <script src="./Magnifier.js"></script>
+    <script>
+        var img1 = ["./images/1.jpg"];
+        var demo1 = document.querySelector("#demo1");
+        var magnifier1 = new Magnifier(img1,demo1);
+
+        var img2 = ["./images/2.webp"];
+        var demo2 = document.querySelector("#demo2");
+        var magnifier2 = new Magnifier(img2,demo2);
+
+        var img3 = ["./images/3.jpg"];
+        var demo3 = document.querySelector("#demo3");
+        var magnifier3 = new Magnifier(img3,demo3);
+
+        // var small = document.querySelector('.small');
+        // var fangdajing = document.querySelector('.fangdajing');
+        // var big = document.querySelector('.big');
+        // var bigImg = document.querySelector('.bigImg');
+
+        // small.onmousemove = function (e) {
+
+        //     var x = e.offsetX
+        //     var y = e.offsetY
+        //     // console.log(x,y);
+
+        //     fangdajing.style.display = 'block';
+        //     big.style.display = 'block';
+
+        //     fangdajing.style.left = parseInt(x - fangdajing.offsetWidth / 2) + "px";
+        //     fangdajing.style.top = parseInt(y - fangdajing.offsetHeight / 2) + "px";
+
+        //     fangdajing.style.left = parseInt(fangdajing.style.left) < 0 ? 0 : fangdajing.style.left;
+
+        //     fangdajing.style.left = parseInt(fangdajing.style.left) > (small.offsetWidth - fangdajing.offsetWidth) ? (small.offsetWidth - fangdajing.offsetWidth) + "px" : fangdajing.style.left;
+
+        //     fangdajing.style.top = parseInt(fangdajing.style.top) < 0 ? 0 : fangdajing.style.top;
+
+        //     fangdajing.style.top = parseInt(fangdajing.style.top) > (small.offsetHeight - fangdajing.offsetHeight) ? (small.offsetHeight - fangdajing.offsetHeight) + "px" : fangdajing.style.top;
+
+        //     bigImg.style.left = -2 * parseInt(fangdajing.style.left) + "px";
+        //     bigImg.style.top = -2 * parseInt(fangdajing.style.top) + "px";
+        // }
+
+        // small.onmouseout = function () {
+        //     fangdajing.style.display = 'none';
+        //     big.style.display = 'none';
+        // }
+
+
+        // function Magnifier(image, readyEl) {
+        //     this.image = null;
+        //     this.init = function () {
+        //         var div = document.createElement("div");
+        //         var img = document.createElement("img");
+        //         var container = document.createElement("div");
+        //         container.className = "container";
+
+        //         var small = document.createElement("div");
+        //         var smallImg = document.createElement("img");;
+        //         var m = document.createElement("div");
+        //         var fangdajing = document.createElement("div");
+
+
+        //         small.className = "small";
+        //         smallImg.className = "smallImg";
+        //         m.className = "m";
+        //         fangdajing.className = "fangdajing";
+
+        //         small.appendChild(smallImg);
+        //         small.appendChild(m);
+        //         small.appendChild(fangdajing);
+
+        //         var big = document.createElement("div");
+        //         var bigImg = document.createElement("img");;
+
+        //         big.className = "big";
+        //         bigImg.className = "bigImg";
+
+        //         big.appendChild(bigImg);
+
+        //         container.appendChild(small);
+        //         container.appendChild(big);
+
+        //         smallImg.src = bigImg.src = image;
+
+        //         readyEl.appendChild(container)
+
+        //         var that = this;
+
+        //         small.onmousemove = function (e) {
+
+        //             var x = e.offsetX
+        //             var y = e.offsetY
+        //             // console.log(x,y);
+
+        //             fangdajing.style.display = 'block';
+        //             big.style.display = 'block';
+
+        //             fangdajing.style.left = parseInt(x - fangdajing.offsetWidth / 2) + "px";
+        //             fangdajing.style.top = parseInt(y - fangdajing.offsetHeight / 2) + "px";
+
+        //             fangdajing.style.left = parseInt(fangdajing.style.left) < 0 ? 0 : fangdajing.style.left;
+
+        //             fangdajing.style.left = parseInt(fangdajing.style.left) > (small.offsetWidth - fangdajing.offsetWidth) ? (small.offsetWidth - fangdajing.offsetWidth) + "px" : fangdajing.style.left;
+
+        //             fangdajing.style.top = parseInt(fangdajing.style.top) < 0 ? 0 : fangdajing.style.top;
+
+        //             fangdajing.style.top = parseInt(fangdajing.style.top) > (small.offsetHeight - fangdajing.offsetHeight) ? (small.offsetHeight - fangdajing.offsetHeight) + "px" : fangdajing.style.top;
+
+        //             bigImg.style.left = -2 * parseInt(fangdajing.style.left) + "px";
+        //             bigImg.style.top = -2 * parseInt(fangdajing.style.top) + "px";
+        //         }
+
+        //         small.onmouseout = function () {
+        //             fangdajing.style.display = 'none';
+        //             big.style.display = 'none';
+        //         }
+
+        //     }
+
+        //     this.init();
+        // }
+
+    </script>
+</body>
+
+</html>
